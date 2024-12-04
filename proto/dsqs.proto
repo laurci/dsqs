@@ -1,0 +1,22 @@
+syntax = "proto2";
+package dsqs;
+
+import "google/protobuf/empty.proto";
+
+
+service Queue {
+    rpc Enqueue (EnqueueRequest) returns (google.protobuf.Empty);
+    rpc Dequeue (DequeueRequest) returns (DequeueReply);
+}
+
+message EnqueueRequest {
+    required bytes message = 1;
+}
+
+message DequeueRequest {
+    optional uint64 max_wait_delay_ms = 1;
+}
+
+message DequeueReply {
+    required bytes message = 1;
+}
